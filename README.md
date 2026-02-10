@@ -5,6 +5,6 @@ type Facultative = Hobby | Extra
 
 let extra1: Facultative;
 extra1 = "cooking"
-extra1 = "geography"
+extra1 = "dancing"
 extra1 = "PE"
 
