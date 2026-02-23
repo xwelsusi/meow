@@ -1,30 +1,33 @@
-private static totalAnimals = 0
+class Animal {
+  private static totalAnimals = 0;
   
   private constructor(
     public species: 'dog' | 'cat',
     public name: string,
     public birthDate: Date
   ) {
-    Animal.totalAnimals++
+    Animal.totalAnimals++;
   }
 
   static create(species: 'dog' | 'cat', name: string, birthDate: Date): Animal {
-    const age = this.calculateAge(birthDate)
-    if (age < 0) throw new Error('Дата рождения не может быть в будущем')
-    if (age > 30) throw new Error('Возраст животного не может превышать 30 лет')
-    return new Animal(species, name, birthDate)
+    const age = this.calculateAge(birthDate);
+    
+    if (age < 0) throw new Error('Дата рождения введена неверно');
+    if (age > 30) throw new Error('Возраст животного не может превышать 30 лет');
+    
+    return new Animal(species, name, birthDate);
   }
 
   static getTotalAnimals(): number {
-    return Animal.totalAnimals
+    return Animal.totalAnimals;
   }
 
   getAge(): number {
-    return Animal.calculateAge(this.birthDate)
+    return Animal.calculateAge(this.birthDate);
   }
 
   private static calculateAge(birthDate: Date): number {
-    const ageMs = Date.now() - birthDate.getTime()
-    return Math.floor(ageMs / (1000 * 60 * 60 * 24 * 365.25))
+    const ageInMs = Date.now() - birthDate.getTime();
+    return Math.floor(ageInMs / (1000 * 60 * 60 * 24 * 365.25));
   }
 }
