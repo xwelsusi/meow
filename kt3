@@ -1,0 +1,18 @@
+class PartLine extends InvoiceLine {
+    constructor(title: string, qty: number, private readonly pricePerUnit: number) {
+        super(title, qty);
+    }
+
+    protected unitPrice(): Money {
+        return { amount: this.pricePerUnit, currency: "RUB" };
+    }
+
+    public total(): Money {
+        const baseAmount = this.pricePerUnit * this.qty;
+        const markup = 0.5;
+        return {
+            amount: baseAmount * (1 + markup),
+            currency: "RUB"
+        };
+    }
+}
